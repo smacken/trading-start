@@ -1,0 +1,12 @@
+{
+    "editor.formatOnSave": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "debug.node.autoAttach": "off",
+    "python.pythonPath": "d:\\utils\\Anaconda3\\python.exe",
+    "azureFunctions.deploySubpath": "azure/azure.zip",
+    "azureFunctions.projectLanguage": "Python",
+    "azureFunctions.projectRuntime": "~2",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "func: pack"
+}

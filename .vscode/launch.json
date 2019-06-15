@@ -1,0 +1,67 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "File import",
+            "program": "${workspaceFolder}\\index.ts",
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "args": [
+                "--file",
+                "--holdings",
+                "--transactions"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Commsec import",
+            "program": "${workspaceFolder}\\index.js",
+            "runtimeArgs": [],
+            "args": [
+                "--holdings"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "sourceMaps": true
+        },
+        {
+            "name": "Unit tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/mocha.js",
+            "stopOnEntry": true,
+            "args": [
+                "${workspaceRoot}/TESTTODEBUG.js"
+            ],
+            "runtimeExecutable": null,
+            "env": {
+                "NODE_ENV": "test"
+            }
+        },
+        {
+            "name": "Attach to Python Functions",
+            "type": "python",
+            "request": "attach",
+            "port": 9091,
+            "preLaunchTask": "func: host start"
+        }
+    ],
+}

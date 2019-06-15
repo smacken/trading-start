@@ -1,0 +1,28 @@
+{
+    "name": "trading-start",
+    "version": "1.0.0",
+    "description": "init trading platform",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js --file --holdings",
+        "transactions": "node index.js --file --transactions",
+        "commsec": "node index.js --holdings",
+        "test": "test"
+    },
+    "author": "scott mackenzie",
+    "license": "ISC",
+    "dependencies": {
+        "cacheman-file": "^0.2.1",
+        "commsec": "^0.2.0",
+        "csv-parse": "^4.3.4",
+        "csv-stringify": "^5.3.0",
+        "fs-extra-promise": "^1.0.1",
+        "mocha": "^6.0.2",
+        "prompt": "^1.0.0",
+        "stream-transform": "^1.0.8"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^11.9.4"
+    }
+}
