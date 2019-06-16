@@ -33,6 +33,9 @@ bower_components
 build/Release
 **/*.js
 **/*.js.map
+temp
+temp/*.*
+config.dev.json
 
 # Dependency directories
 node_modules/

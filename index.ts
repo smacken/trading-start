@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { promisify } from 'util';
 import * as path from 'path';
 import { TradingFile } from './TradingFile'
 import { CommsecImport, getCache, setCache } from './Commsec'
@@ -16,7 +15,6 @@ let isFile = argv.some(arg => ['--file', '-file', '--f', '-f'].includes(arg));
 let isHoldings = argv.some(arg => ['--holdings', '-holdings', '--holding', '-holding', '--h', '-h'].includes(arg));
 let isTransactions = argv.some(arg => ['--transactions', '-transactions', '--trans', '-trans', '--t', '-t'].includes(arg));
 let isAccountTrans = argv.some(arg => ['--account', '-account', '-a', '--a'].includes(arg));
-
 
 let getCredentials = (username?: string): Promise<any> => {
     var schema = {
