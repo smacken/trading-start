@@ -39,7 +39,9 @@ let getCredentials = (username?: string): Promise<any> => {
     });
 }
 (async () => {
+    console.log('trading start');
     if (isFile) {
+        console.log('copying trading files');
         let trading = new TradingFile(isFile, config.sourcePath, config.destinationPath);
         try {
             if (isHoldings) await trading.setupFile("Holdings");
@@ -48,6 +50,7 @@ let getCredentials = (username?: string): Promise<any> => {
         } catch (error) {
             console.error(error);
         }
+        console.log('completed');
     } else {
         prompt.start();
         let commsec;
