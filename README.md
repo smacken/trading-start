@@ -16,31 +16,32 @@ config.json
 
 Download & Run to import trading data from your broker.
 
-```
-node index.js --file -holding -trans -account
+```bash
+node index.js --file --holdings --transactions --account
 ```
 
+In order to pull data directly from the broker, omit the --file flag
+You will be asked for credentials in order to retrieve trading data.
+```bash
+node index.js --holdings
+```
 ### Prerequisites
 
 Node.js/npm
 * [NodeJs](https://nodejs.org/en/download/)
-
-```
-Give examples
-```
 
 ### Installing
 
 Download/clone trading-start. Add to path.
 
 ```
-Give the example
+git clone https://github.com/smacken/trading-start.git
 ```
 
 Configure the location/destination of your trading system to import data to
 
 ```
-until finished
+config.json > 'sourcePath', 'destinationPath'
 ```
 From Commsec data will usually come to /Downloads as Holdings(*).csv, Transactions(*).csv, or CSVData.csv
 
@@ -49,14 +50,6 @@ From Commsec data will usually come to /Downloads as Holdings(*).csv, Transactio
 Explain how to run the automated tests for this system
 
 ### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
 
 Explain what these tests test and why
 

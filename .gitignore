@@ -36,6 +36,9 @@ build/Release
 temp
 temp/*.*
 config.dev.json
+config.prod.json
+**/local.settings.json
+.env/
 
 # Dependency directories
 node_modules/
