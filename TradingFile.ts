@@ -42,13 +42,23 @@ export class TradingFile {
         await moveFiles(path.join(this.from, highest), path.join(this.to, `${outputFile}.csv`));
     }
 
+    leftpad(val: number, resultLength = 2, leftpadChar = '0'): string {
+        return (String(leftpadChar).repeat(resultLength)
+            + String(val)).slice(String(val).length);
+    }
+
+    dateFormat(date: Date): string {
+        return this.leftpad(date.getDate(), 2)
+            + '_' + this.leftpad(date.getMonth() + 1, 2)
+            + '_' + date.getFullYear();
+    }
+
     async replace(existing: string) {
         let existingFile = await fileExists(path.join(this.to, `${existing}.csv`));
         if (!existingFile) return;
         let now = new Date();
-        let month = now.getMonth();
-        let year = now.getFullYear();
-        let newFileDate = `${existing}_${month}${year}.csv`
+        let dateFormat = this.dateFormat(now);
+        let newFileDate = `${existing}_${dateFormat}.csv`
         let exists = false;
         try {
             exists = await fileExists(path.join(this.to, newFileDate));
@@ -56,9 +66,10 @@ export class TradingFile {
             exists = false;
         }
         if (exists) {
-            let day = now.getDay();
-            newFileDate = `${existing}_${day}${month}${year}.csv`
+            newFileDate = `${existing}_${dateFormat}_1.csv`
         }
         await rename(path.join(this.to, `${existing}.csv`), path.join(this.to, newFileDate))
     }
+
+
 }
