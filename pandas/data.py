@@ -32,24 +32,24 @@ def get_holdings(file):
     return holdings
     
 def get_holdings_frame(data_path):
-    holdings_files = [f for f in glob.glob(data_path + 'Holdings*.csv')]
+    ''' current holdings data frame'''
+    pkl = data_path + 'Holdings.pkl'
     df = None
+    holdings_files = [f for f in glob.glob(data_path + 'Holdings*.csv')]
     for f in holdings_files:
         modified = time.ctime(os.path.getmtime(f))
         mod = datetime.datetime.strptime(modified, "%a %b %d %H:%M:%S %Y")
         df = get_holdings(f)
         df['Date'] = mod.date()
         df = df[df['Avail Units'].notnull()]
-        
-        pkl = data_path + 'Holdings.pkl'
         try:
             existing = pd.read_pickle(pkl)
             has_holdings = existing[existing['Date'] == mod.date()]
             if has_holdings.Code.count() > 0:
                 continue
             df = df.append(existing, ignore_index=True)
-        except:
-            print('no pkl exists')
+        except Exception as ex:
+            print('no pkl exists', str(ex))
         df.to_pickle(pkl)
     
     df = df.sort_values(by=['Date', 'Code'], ascending=False)
@@ -78,7 +78,7 @@ def get_transaction_frame(data_path):
     for f in files:
         modified = time.ctime(os.path.getmtime(f))
         mod = datetime.datetime.strptime(modified, "%a %b %d %H:%M:%S %Y")
-        print(mod.date())
+        #print(mod.date())
         df = get_transactions(f)
         try:
             existing = pd.read_pickle(pkl)
@@ -92,7 +92,7 @@ def get_transaction_frame(data_path):
             if len(drop_index) > 0:
                 df.drop(drop_index, inplace=True)
             df = df.append(existing, ignore_index=True)
-            print(len(df.index))
+            #print(len(df.index))
         except Exception as e:
             print('no pkl exists', str(e))
         df.to_pickle(pkl)
@@ -134,6 +134,12 @@ def get_account_frame(data_path):
     
     df = df.sort_values(by=['Date'], ascending=False)
     return df
+
+def get_price_frame(data_path):
+    ''' get price time-series ticker data ohlc '''
+    price_data = pd.read_pickle(f'{data_path}Prices.pkl')
+    price_data.drop_duplicates(subset=['Date', 'Tick'], keep='first', inplace=True)
+    return price_data
 
 def get_entityset(holding_data, price_data, trans_data):
     ''' entityset '''
