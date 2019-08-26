@@ -6,7 +6,7 @@ export class PandasImport {
     }
 
     async import(): Promise<void> {
-        const pythonProcess = spawn('python', ["path/to/script.py", this.dataPath]);
-        pythonProcess.stdout.on('data', (data) => console.log(data));
+        const pythonProcess = spawn('cmd.exe', ["/c", "call .\\pandas\\run.bat"]);
+        pythonProcess.stdout.on('data', (chunk) => console.log(chunk.toString('utf8')));
     }
 }

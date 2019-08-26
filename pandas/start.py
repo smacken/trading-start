@@ -1,12 +1,18 @@
 '''
  trading start data importer
 '''
-import os, json
-import os.path
+import os, json, sys
 from pathlib import Path
 import data
 
-root = Path(os.path.abspath('')).parent
+if len(sys.argv) < 2:
+    sys.exit('Usage: %s config-path' % sys.argv[0])
+
+if not os.path.exists(sys.argv[1]):
+    sys.exit('ERROR: Database %s was not found!' % sys.argv[1])
+
+pwd = sys.argv[1]
+root = Path(pwd).parent
 data_path = ''
 
 with open(os.path.join(root, 'config.json')) as json_data:

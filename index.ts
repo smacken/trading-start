@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import * as path from 'path';
-import { TradingFile } from './TradingFile'
-import { CommsecImport, getCache, setCache } from './Commsec'
+import { TradingFile } from './TradingFile';
+import { CommsecImport, getCache, setCache } from './Commsec';
+import { PandasImport } from './PandasImport';
 var config = require('./config.json');
 const prompt = require('prompt');
 const CachemanFile = require('cacheman-file');
@@ -15,6 +16,7 @@ let isFile = argv.some(arg => ['--file', '-file', '--f', '-f'].includes(arg));
 let isHoldings = argv.some(arg => ['--holdings', '-holdings', '--holding', '-holding', '--h', '-h'].includes(arg));
 let isTransactions = argv.some(arg => ['--transactions', '-transactions', '--trans', '-trans', '--t', '-t'].includes(arg));
 let isAccountTrans = argv.some(arg => ['--account', '-account', '-a', '--a'].includes(arg));
+let pandas = argv.some(arg => ['--pandas', '-pandas', '--p', '-p'].includes(arg));
 
 let getCredentials = (username?: string): Promise<any> => {
     var schema = {
@@ -76,5 +78,10 @@ let getCredentials = (username?: string): Promise<any> => {
         } finally {
             commsec = undefined;
         }
+    }
+
+    if (pandas) {
+        const pandasImport = new PandasImport(config.destinationPath);
+        await pandasImport.import();
     }
 })();

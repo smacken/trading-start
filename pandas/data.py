@@ -51,9 +51,16 @@ def get_holdings_frame(data_path):
         except Exception as ex:
             print('no pkl exists', str(ex))
         df.to_pickle(pkl)
-    
+
     df = df.sort_values(by=['Date', 'Code'], ascending=False)
     return df
+
+def holdings(data_path, latest=True):
+    ''' get the pickled holding data set '''
+    holding = pd.read_pickle(f'{data_path}Holdings.pkl')
+    holding = holding.rename(columns={'Code': 'Tick'})
+    holding['index'] = holding.index
+    return holding if not latest else holding[holding.Date == holding.Date.max()]
 
 def get_transactions(file):
     trans = pd.read_csv(file)

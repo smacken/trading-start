@@ -1,1 +1,1 @@
-cmd /k "conda activate portfolio && python start.py"
+cmd /k "conda activate portfolio && python ./pandas/start.py %~dp0"
