@@ -7,11 +7,7 @@ const rename = promisify(fs.rename);
 const readdir = promisify(fs.readdir);
 
 export class TradingFile {
-    isFile: boolean;
-    from: string = '';
-    to: string = '';
-
-    constructor(isFile: boolean, from: string, to: string) {
+    constructor(public isFile: boolean, public from: string, public to: string) {
         this.from = from;
         this.isFile = isFile;
         this.to = to;

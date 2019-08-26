@@ -1,0 +1,1 @@
+cmd /k "conda activate portfolio && python start.py"
