@@ -146,6 +146,7 @@ def get_price_frame(data_path):
     ''' get price time-series ticker data ohlc '''
     price_data = pd.read_pickle(f'{data_path}Prices.pkl')
     price_data.drop_duplicates(subset=['Date', 'Tick'], keep='first', inplace=True)
+    price_data['index'] = price_data.index
     return price_data
 
 def get_entityset(holding_data, price_data, trans_data):
