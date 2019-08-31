@@ -7,6 +7,8 @@ import pandas as pd
 import numpy as np
 import csv
 import featuretools as ft
+import pyasx
+import pyasx.data.companies
 
 def get_holdings(file):
     '''
@@ -85,7 +87,6 @@ def get_transaction_frame(data_path):
     for f in files:
         modified = time.ctime(os.path.getmtime(f))
         mod = datetime.datetime.strptime(modified, "%a %b %d %H:%M:%S %Y")
-        #print(mod.date())
         df = get_transactions(f)
         try:
             existing = pd.read_pickle(pkl)
@@ -99,7 +100,6 @@ def get_transaction_frame(data_path):
             if len(drop_index) > 0:
                 df.drop(drop_index, inplace=True)
             df = df.append(existing, ignore_index=True)
-            #print(len(df.index))
         except Exception as e:
             print('no pkl exists', str(e))
         df.to_pickle(pkl)
@@ -149,8 +149,50 @@ def get_price_frame(data_path):
     price_data['index'] = price_data.index
     return price_data
 
-def get_entityset(holding_data, price_data, trans_data):
-    ''' entityset '''
+def get_companies_frame(data_path):
+
+    etf_data = f'{data_path}etf.json'
+    etf = pd.read_json(etf_data)
+    etf = etf.loc[1:]
+    etf_codes = etf['ASX Code'].tolist()
+
+    company_pkl = f'{data_path}Companies.pkl'
+    trans_pkl = f'{data_path}Transactions.pkl'
+    trans = pd.read_pickle(trans_pkl)
+    company_frame = None
+    
+    for tick in trans.Tick.unique().tolist():
+        
+        if tick in etf_codes:
+            continue
+        
+        try:
+            company = pd.read_pickle(company_pkl)
+        except Exception as ex:
+            print(ex)
+            company_info = pyasx.data.companies.get_company_info(tick)
+            company = pd.DataFrame([company_info])
+            share = pd.DataFrame([company_info['primary_share']])
+            company = company.merge(share, on='ticker')
+            company['Date'] = pd.to_datetime('today')
+            company.to_pickle(company_pkl)
+
+        if company[company.ticker == tick].empty:
+            company_info = pyasx.data.companies.get_company_info(tick)
+            company_df = pd.DataFrame([company_info])
+            share = pd.DataFrame([company_info['primary_share']])
+            company_df = company_df.merge(share, on='ticker')
+            company_df['Date'] = pd.to_datetime('today')
+            company = company.append(company_df)
+            company_frame = company if company_frame is None or company_frame.empty else company_frame.append(company)
+    
+    company_frame.drop_duplicates(['ticker', 'Date'], keep='first', inplace=True)
+    company_frame.rename(columns={'ticker': 'Tick'}, inplace=True)
+    company_frame['index'] = company_frame.index
+    return company_frame
+
+def get_entityset(holding_data, price_data, trans_data, company_data):
+    ''' Construct an entityset data model from different data frames '''
     es = ft.EntitySet(id="trading")
     es = es.entity_from_dataframe(entity_id="prices",
                                     dataframe=price_data,
@@ -162,6 +204,11 @@ def get_entityset(holding_data, price_data, trans_data):
                                     index='Tick',
                                     time_index="Date",
                                     variable_types={"Tick": ft.variable_types.Categorical})
+    es = es.entity_from_dataframe(entity_id="companies",
+                                    dataframe=company_data,
+                                    index='Tick',
+                                    time_index="Date",
+                                    variable_types={"Tick": ft.variable_types.Categorical})
     es = es.entity_from_dataframe(entity_id="transactions",
                                     dataframe=trans_data,
                                     index='index',
@@ -170,6 +217,8 @@ def get_entityset(holding_data, price_data, trans_data):
                                                     "Type": ft.variable_types.Categorical})
     holdings_trans = ft.Relationship(es["holdings"]["Tick"], es["transactions"]["Tick"])
     es = es.add_relationship(holdings_trans)
+    holdings_companies = ft.Relationship(es["holdings"]["Tick"], es["companies"]["Tick"])
+    es = es.add_relationship(holdings_companies)
     holdings_prices = ft.Relationship(es["holdings"]["Tick"], es["prices"]["Tick"])
     es = es.add_relationship(holdings_prices)
     return es
