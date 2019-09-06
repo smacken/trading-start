@@ -9,7 +9,7 @@
         "watch:build": "tsc --watch",
         "transactions": "node index.js --file --transactions",
         "commsec": "node index.js --holdings",
-        "test": "test"
+        "test": "jest"
     },
     "author": "scott mackenzie",
     "repository": {
@@ -28,8 +28,22 @@
         "stream-transform": "^2.0.1"
     },
     "devDependencies": {
+        "@types/jest": "^24.0.18",
         "@types/mocha": "^5.2.7",
         "@types/node": "^12.7.4",
+        "jest": "^24.9.0",
+        "ts-jest": "^24.0.2",
         "typescript": "^3.6.2"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "transform": {
+            "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+        },
+        "testRegex": "/test/.*\\.(ts|tsx|js)$"
     }
 }
