@@ -150,6 +150,7 @@ def get_price_frame(data_path):
     return price_data
 
 def get_companies_frame(data_path):
+    ''' company details data frame '''
 
     etf_data = f'{data_path}etf.json'
     etf = pd.read_json(etf_data)
@@ -188,11 +189,19 @@ def get_companies_frame(data_path):
     
     company_frame.drop_duplicates(['ticker', 'Date'], keep='first', inplace=True)
     company_frame.rename(columns={'ticker': 'Tick'}, inplace=True)
+    company_frame['DateIndex'] = company_frame['Date'].apply(lambda x: x.strftime('%y-%m-%d'))
+    company_frame['year_low_date'] = company_frame['year_low_date'].apply(lambda x: x.strftime('%y-%m-%d'))
+    company_frame['year_high_date'] = company_frame['year_high_date'].apply(lambda x: x.strftime('%y-%m-%d'))
+    company_frame = company_frame.reset_index(drop=True)
     company_frame['index'] = company_frame.index
+    company_frame.to_pickle(company_pkl)
     return company_frame
 
 def get_entityset(holding_data, price_data, trans_data, company_data):
     ''' Construct an entityset data model from different data frames '''
+
+    company_listing = company_data.drop(['Date', 'listing_date', 'delisting_date', 'last_trade_date', 'indices'], axis=1)
+
     es = ft.EntitySet(id="trading")
     es = es.entity_from_dataframe(entity_id="prices",
                                     dataframe=price_data,
@@ -205,8 +214,8 @@ def get_entityset(holding_data, price_data, trans_data, company_data):
                                     time_index="Date",
                                     variable_types={"Tick": ft.variable_types.Categorical})
     es = es.entity_from_dataframe(entity_id="companies",
-                                    dataframe=company_data,
-                                    index='Tick',
+                                    dataframe=company_listing,
+                                    index='index',
                                     time_index="Date",
                                     variable_types={"Tick": ft.variable_types.Categorical})
     es = es.entity_from_dataframe(entity_id="transactions",
