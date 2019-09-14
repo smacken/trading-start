@@ -7,6 +7,7 @@
         "start": "node index.js --file --holdings",
         "build": "tsc",
         "watch:build": "tsc --watch",
+        "lint": "tslint -c tslint.json",
         "transactions": "node index.js --file --transactions",
         "commsec": "node index.js --holdings",
         "test": "jest"
