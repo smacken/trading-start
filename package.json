@@ -35,16 +35,5 @@
         "jest": "^24.9.0",
         "ts-jest": "^24.1.0",
         "typescript": "^3.6.3"
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js"
-        ],
-        "transform": {
-            "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
-        },
-        "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
     }
 }

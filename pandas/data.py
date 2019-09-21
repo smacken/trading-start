@@ -174,22 +174,31 @@ def get_companies_frame(data_path):
             company_info = pyasx.data.companies.get_company_info(tick)
             company = pd.DataFrame([company_info])
             share = pd.DataFrame([company_info['primary_share']])
-            company = company.merge(share, on='ticker')
+            company = company.merge(share, on='Tick')
             company['Date'] = pd.to_datetime('today')
+            company['Tick'] = company.ticker
             company.to_pickle(company_pkl)
 
-        if company[company.ticker == tick].empty:
+        company['Tick'] = company['ticker']
+        #display(company[company.Tick == tick])
+        if company[company.Tick == tick].empty:
             company_info = pyasx.data.companies.get_company_info(tick)
             company_df = pd.DataFrame([company_info])
+            company_df['Tick'] = company_df.ticker
             share = pd.DataFrame([company_info['primary_share']])
-            company_df = company_df.merge(share, on='ticker')
+            share['Tick'] = share['ticker']
+            company_df = company_df.merge(share, on='Tick', sort=True)
             company_df['Date'] = pd.to_datetime('today')
-            company = company.append(company_df)
+            company = company.append(company_df, sort=True)
             company_frame = company if company_frame is None or company_frame.empty else company_frame.append(company)
+        else:
+            company_frame = company
     
-    company_frame.drop_duplicates(['ticker', 'Date'], keep='first', inplace=True)
-    company_frame.rename(columns={'ticker': 'Tick'}, inplace=True)
-    company_frame['DateIndex'] = company_frame['Date'].apply(lambda x: x.strftime('%y-%m-%d'))
+    company_frame.drop_duplicates(['Tick', 'Date'], keep='first', inplace=True)
+    company_frame.rename(columns={'Tick': 'Tick'}, inplace=True)
+    
+    print(company_frame.Date.values)
+    company_frame['DateIndex'] = company_frame['Date'].apply(lambda x: x.strftime('%y-%m-%d') if x else None)
     company_frame['year_low_date'] = company_frame['year_low_date'].apply(lambda x: x.strftime('%y-%m-%d'))
     company_frame['year_high_date'] = company_frame['year_high_date'].apply(lambda x: x.strftime('%y-%m-%d'))
     company_frame = company_frame.reset_index(drop=True)

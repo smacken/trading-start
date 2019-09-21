@@ -29,6 +29,7 @@ holding_data = holding_data[holding_data.Date == holding_data.Date.max()]
 
 account_data = data.get_account_frame(data_path)
 price_data = data.get_price_frame(data_path)
+company_data = data.get_companies_frame(data_path)
 
-es = data.get_entityset(holding_data, price_data, trans_data)
+es = data.get_entityset(holding_data, price_data, trans_data, company_data)
 print(es)
