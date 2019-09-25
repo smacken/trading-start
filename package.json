@@ -12,6 +12,17 @@
         "commsec": "node index.js --holdings",
         "test": "jest"
     },
+    "jest": {
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "transform": {
+            "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+        },
+        "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
+    },
     "author": "scott mackenzie",
     "repository": {
         "type": "git",
