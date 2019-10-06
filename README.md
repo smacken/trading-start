@@ -4,6 +4,8 @@ Trading data within your broker doesn't give you enough information to run a tra
 This imports your trading data from your broker into your trading system so that you can then
 more accurately analyse your trading portfolio.
 
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/smacken/trading-start/&lt;master>.svg?style=flat-square)](https://codecov.io/gh/smaken/trading-start/)
+
 ## Getting Started
 
 Clone or download the trading-start importer.

@@ -39,6 +39,7 @@ config.dev.json
 config.prod.json
 **/local.settings.json
 .env/
+/coverage
 
 # Dependency directories
 node_modules/

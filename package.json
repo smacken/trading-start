@@ -10,7 +10,7 @@
         "lint": "tslint -c tslint.json",
         "transactions": "node index.js --file --transactions",
         "commsec": "node index.js --holdings",
-        "test": "jest"
+        "test": "jest --coverage"
     },
     "jest": {
         "moduleFileExtensions": [
@@ -21,7 +21,9 @@
         "transform": {
             "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
         },
-        "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
+        "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+        "coverageDirectory": "./coverage/",
+        "collectCoverage": true
     },
     "author": "scott mackenzie",
     "repository": {
