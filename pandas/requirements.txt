@@ -87,5 +87,5 @@ webencodings==0.5.1
 widgetsnbextension==3.5.1
 wincertstore==0.2
 wrapt==1.11.2
-yahoo-historical==0.3.0
+yahoo-historical==0.3.1
 zict==1.0.0
