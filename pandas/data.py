@@ -208,16 +208,20 @@ def get_companies_frame(data_path):
             print(ex)
             company_info = pyasx.data.companies.get_company_info(tick)
             company = pd.DataFrame([company_info])
+            company.rename(columns={'ticker': 'Tick'}, inplace=True)
             share = pd.DataFrame([company_info['primary_share']])
+            share.rename(columns={'ticker': 'Tick'}, inplace=True)
             company = company.merge(share, on='Tick')
             company['Date'] = pd.to_datetime('today')
+            
             company.to_pickle(company_pkl)
 
-        #display(company[company.Tick == tick])
         if company[company.Tick == tick].empty:
             company_info = pyasx.data.companies.get_company_info(tick)
             company_df = pd.DataFrame([company_info])
+            company_df.rename(columns={'ticker': 'Tick'}, inplace=True)
             share = pd.DataFrame([company_info['primary_share']])
+            share.rename(columns={'ticker': 'Tick'}, inplace=True)
             company_df = company_df.merge(share, on='Tick')
             company_df['Date'] = pd.to_datetime('today')
             company = company.append(company_df)
@@ -228,8 +232,6 @@ def get_companies_frame(data_path):
     company_frame.drop_duplicates(['Tick', 'Date'], keep='first', inplace=True)
     company_frame.rename(columns={'Tick': 'Tick'}, inplace=True)
     company_frame['DateIndex'] = company_frame['Date'].apply(lambda x: x.strftime('%y-%m-%d'))
-    #company_frame['year_low_date'] = company_frame['year_low_date'].apply(lambda x: x.strftime('%y-%m-%d'))
-    #company_frame['year_high_date'] = company_frame['year_high_date'].apply(lambda x: x.strftime('%y-%m-%d'))
     company_frame = company_frame.reset_index(drop=True)
     company_frame['index'] = company_frame.index
     company_frame.to_pickle(company_pkl)
