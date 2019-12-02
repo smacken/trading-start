@@ -52,7 +52,7 @@ parso==0.5.1
 pickleshare==0.7.5
 plotly==4.3.0
 prometheus-client==0.7.1
-prompt-toolkit==3.0.1
+prompt-toolkit==3.0.2
 psutil==5.6.7
 pyasx==2.2
 Pygments==2.5.2
