@@ -37,7 +37,7 @@
         "csv-parse": "^4.8.3",
         "csv-stringify": "^5.3.6",
         "fs-extra-promise": "^1.0.1",
-        "mocha": "^6.2.2",
+        "mocha": "^7.0.0",
         "prompt": "^1.0.0",
         "stream-transform": "^2.0.1"
     },
