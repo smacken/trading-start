@@ -50,7 +50,7 @@ pandocfilters==1.4.2
 papermill==1.2.1
 parso==0.5.2
 pickleshare==0.7.5
-plotly==4.4.1
+plotly==4.5.0
 prometheus-client==0.7.1
 prompt-toolkit==3.0.2
 psutil==5.6.7
