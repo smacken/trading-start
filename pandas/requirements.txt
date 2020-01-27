@@ -48,7 +48,7 @@ numpy==1.18.1
 pandas==0.25.3
 pandocfilters==1.4.2
 papermill==1.2.1
-parso==0.5.2
+parso==0.6.0
 pickleshare==0.7.5
 plotly==4.5.0
 prometheus-client==0.7.1
