@@ -12,7 +12,7 @@ colorama==0.4.3
 dask==2.10.0
 decorator==4.4.1
 defusedxml==0.6.0
-distributed==2.9.3
+distributed==2.10.0
 entrypoints==0.3
 featuretools==0.13.1
 future==0.18.2
