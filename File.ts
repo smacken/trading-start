@@ -1,5 +1,5 @@
-//import * as fs from 'fs';
-import fs from 'fs';
+// import * as fs from 'fs';
+import fs from "fs";
 export function fileExists(filepath: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
         fs.access(filepath, fs.constants.F_OK, error => {
@@ -22,6 +22,6 @@ export async function moveFiles(from: string, to: string): Promise<void> {
             });
         });
     } catch (error) {
-        console.error('moveFiles error: ', error);
+        console.error("moveFiles error: ", error);
     }
 }
