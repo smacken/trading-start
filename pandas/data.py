@@ -204,6 +204,7 @@ def get_companies_frame(data_path):
         
         try:
             company = pd.read_pickle(company_pkl)
+            company.rename(columns={'ticker': 'Tick'}, inplace=True)
         except Exception as ex:
             print(ex)
             company_info = pyasx.data.companies.get_company_info(tick)
@@ -214,8 +215,6 @@ def get_companies_frame(data_path):
             company = company.merge(share, on='Tick')
             company['Date'] = pd.to_datetime('today')
             
-            company.to_pickle(company_pkl)
-
         if company[company.Tick == tick].empty:
             company_info = pyasx.data.companies.get_company_info(tick)
             company_df = pd.DataFrame([company_info])
@@ -227,10 +226,11 @@ def get_companies_frame(data_path):
             company = company.append(company_df)
             company_frame = company if company_frame is None or company_frame.empty else company_frame.append(company)
         else:
-            company_frame = company
+            company_frame = company if company_frame is None else company_frame.append(company)
     
     company_frame.drop_duplicates(['Tick', 'Date'], keep='first', inplace=True)
     company_frame.rename(columns={'Tick': 'Tick'}, inplace=True)
+    company_frame['Date'] = company_frame['Date'].apply(lambda x: x if not pd.isnull(x) else pd.to_datetime('today'))
     company_frame['DateIndex'] = company_frame['Date'].apply(lambda x: x.strftime('%y-%m-%d'))
     company_frame = company_frame.reset_index(drop=True)
     company_frame['index'] = company_frame.index
