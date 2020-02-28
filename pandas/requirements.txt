@@ -88,4 +88,4 @@ widgetsnbextension==3.5.1
 wincertstore==0.2
 wrapt==1.12.0
 yahoo-historical==0.3.2
-zict==1.0.0
+zict==2.0.0
