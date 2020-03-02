@@ -34,7 +34,7 @@
     "dependencies": {
         "cacheman-file": "^0.2.1",
         "commsec": "^0.2.0",
-        "csv-parse": "^4.8.6",
+        "csv-parse": "^4.8.7",
         "csv-stringify": "^5.3.6",
         "fs-extra-promise": "^1.0.1",
         "mocha": "^7.1.0",
