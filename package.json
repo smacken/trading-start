@@ -42,7 +42,7 @@
         "stream-transform": "^2.0.1"
     },
     "devDependencies": {
-        "@types/jest": "^25.1.5",
+        "@types/jest": "^25.2.1",
         "@types/mocha": "^7.0.2",
         "@types/node": "^13.11.0",
         "jest": "^25.2.7",
