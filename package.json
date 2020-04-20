@@ -35,7 +35,7 @@
         "cacheman-file": "^0.2.1",
         "commsec": "^0.2.0",
         "csv-parse": "^4.8.9",
-        "csv-stringify": "^5.3.6",
+        "csv-stringify": "^5.4.0",
         "fs-extra-promise": "^1.0.1",
         "mocha": "^7.1.1",
         "prompt": "^1.0.0",
