@@ -46,7 +46,7 @@
         "@types/mocha": "^7.0.2",
         "@types/node": "^13.13.5",
         "jest": "^25.5.4",
-        "ts-jest": "^25.4.0",
+        "ts-jest": "^25.5.0",
         "typescript": "^3.8.3"
     }
 }
