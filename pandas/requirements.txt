@@ -53,7 +53,7 @@ pickleshare==0.7.5
 plotly==4.8.2
 prometheus-client==0.8.0
 prompt-toolkit==3.0.5
-psutil==5.7.0
+psutil==5.7.2
 pyasx==2.2
 Pygments==2.6.1
 pylint==2.5.3
