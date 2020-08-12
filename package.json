@@ -43,7 +43,7 @@
     },
     "devDependencies": {
         "@types/jest": "^26.0.9",
-        "@types/mocha": "^8.0.1",
+        "@types/mocha": "^8.0.2",
         "@types/node": "^13.13.5",
         "jest": "^25.5.4",
         "ts-jest": "^25.5.1",
