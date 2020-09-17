@@ -55,7 +55,7 @@ prometheus-client==0.8.0
 prompt-toolkit==3.0.7
 psutil==5.7.2
 pyasx==2.2
-Pygments==2.7.0
+Pygments==2.7.1
 pylint==2.6.0
 pyrsistent==0.17.3
 python-dateutil==2.8.1
