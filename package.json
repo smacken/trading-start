@@ -39,7 +39,7 @@
         "fs-extra-promise": "^1.0.1",
         "mocha": "^8.2.0",
         "prompt": "^1.0.0",
-        "stream-transform": "^2.0.2"
+        "stream-transform": "^2.0.4"
     },
     "devDependencies": {
         "@types/jest": "^26.0.15",
