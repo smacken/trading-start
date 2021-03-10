@@ -47,7 +47,7 @@ notebook==6.1.4
 numpy==1.19.3
 pandas==1.1.4
 pandocfilters==1.4.3
-papermill==2.2.0
+papermill==2.3.3
 parso==0.8.0
 pickleshare==0.7.5
 plotly==4.12.0
