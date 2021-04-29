@@ -1,0 +1,94 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "17:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.22
+    - 14.14.25
+    - 14.14.27
+    - 14.14.28
+    - 14.14.30
+    - 14.14.31
+    - 14.14.32
+    - 14.14.33
+    - 14.14.34
+    - 14.14.35
+    - 14.14.37
+    - 14.14.41
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: "@types/jest"
+    versions:
+    - 26.0.20
+    - 26.0.21
+    - 26.0.22
+  - dependency-name: mocha
+    versions:
+    - 8.2.1
+    - 8.3.0
+    - 8.3.1
+  - dependency-name: csv-parse
+    versions:
+    - 4.15.0
+    - 4.15.1
+    - 4.15.3
+  - dependency-name: "@types/mocha"
+    versions:
+    - 8.2.0
+    - 8.2.1
+  - dependency-name: typescript
+    versions:
+    - 3.9.8
+  - dependency-name: csv-stringify
+    versions:
+    - 5.6.1
+  - dependency-name: stream-transform
+    versions:
+    - 2.0.4
+- package-ecosystem: pip
+  directory: "/pandas"
+  schedule:
+    interval: daily
+    time: "17:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: distributed
+    versions:
+    - 2021.1.1
+    - 2021.2.0
+    - 2021.3.0
+    - 2021.3.1
+    - 2021.4.0
+  - dependency-name: scipy
+    versions:
+    - 1.6.0
+    - 1.6.1
+    - 1.6.2
+  - dependency-name: featuretools
+    versions:
+    - 0.23.0
+    - 0.23.1
+    - 0.23.2
+  - dependency-name: numpy
+    versions:
+    - 1.19.5
+    - 1.20.0
+    - 1.20.1
+  - dependency-name: papermill
+    versions:
+    - 2.3.1
+    - 2.3.2
+  - dependency-name: lxml
+    versions:
+    - 4.6.2
+  - dependency-name: pytz
+    versions:
+    - "2020.5"
